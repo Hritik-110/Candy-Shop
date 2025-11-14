@@ -31,6 +31,7 @@ describe("Sweets API", () => {
     await Sweet.deleteMany({});
   });
 
+  // CREATE TEST
   it("should create a new sweet", async () => {
     const res = await request(app)
       .post("/api/sweets")
@@ -43,9 +44,10 @@ describe("Sweets API", () => {
       });
 
     expect(res.statusCode).toBe(201);
-    expect(res.body).toHaveProperty("name", "Rasgulla");
+    expect(res.body.name).toBe("Rasgulla");
   });
 
+  // GET ALL TEST
   it("should get all sweets", async () => {
     await Sweet.create({
       name: "Ladoo",
@@ -62,6 +64,7 @@ describe("Sweets API", () => {
     expect(res.body.length).toBeGreaterThan(0);
   });
 
+  // UPDATE TEST
   it("should update a sweet", async () => {
     const sweet = await Sweet.create({
       name: "Barfi",
@@ -84,6 +87,7 @@ describe("Sweets API", () => {
     expect(res.body.name).toBe("Kaju Barfi");
   });
 
+  // DELETE TEST
   it("should delete a sweet", async () => {
     const sweet = await Sweet.create({
       name: "Jalebi",
@@ -100,6 +104,7 @@ describe("Sweets API", () => {
     expect(res.body.message).toBe("Sweet deleted successfully");
   });
 
+  // PURCHASE TEST
   it("should purchase a sweet and reduce quantity", async () => {
     const sweet = await Sweet.create({
       name: "Gulab Jamun",
@@ -117,20 +122,21 @@ describe("Sweets API", () => {
     expect(res.body.quantity).toBe(8);
   });
 
+  // RESTOCK TEST
   it("should restock a sweet (admin only)", async () => {
     await request(app).post("/api/auth/register").send({
-      name: "Admin User",
+      name: "Admin",
       email: "admin@test.com",
       password: "password123",
       role: "admin",
     });
 
-    const adminLogin = await request(app).post("/api/auth/login").send({
+    const loginAdmin = await request(app).post("/api/auth/login").send({
       email: "admin@test.com",
       password: "password123",
     });
 
-    const adminToken = adminLogin.body.token;
+    const adminToken = loginAdmin.body.token;
 
     const sweet = await Sweet.create({
       name: "Soan Papdi",
@@ -147,50 +153,53 @@ describe("Sweets API", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.quantity).toBe(15);
   });
-});
 
+  // -------------------------
+  // SEARCH TESTS (INSIDE describe)
+  // -------------------------
 
-it("should search sweets by name", async () => {
-  await Sweet.create([
-    { name: "Rasgulla", category: "Bengali", price: 50, quantity: 10 },
-    { name: "Gulab Jamun", category: "Indian", price: 40, quantity: 12 }
-  ]);
+  it("should search sweets by name", async () => {
+    await Sweet.create([
+      { name: "Rasgulla", category: "Bengali", price: 50, quantity: 10 },
+      { name: "Gulab Jamun", category: "Indian", price: 40, quantity: 12 },
+    ]);
 
-  const res = await request(app)
-    .get("/api/sweets/search?name=ras")
-    .set("Authorization", `Bearer ${token}`);
+    const res = await request(app)
+      .get("/api/sweets/search?name=ras")
+      .set("Authorization", `Bearer ${token}`);
 
-  expect(res.statusCode).toBe(200);
-  expect(res.body.length).toBe(1);
-  expect(res.body[0].name).toBe("Rasgulla");
-});
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(1);
+    expect(res.body[0].name).toBe("Rasgulla");
+  });
 
-it("should filter sweets by category", async () => {
-  await Sweet.create([
-    { name: "Rasgulla", category: "Bengali", price: 50, quantity: 10 },
-    { name: "Ladoo", category: "Indian", price: 30, quantity: 15 }
-  ]);
+  it("should filter sweets by category", async () => {
+    await Sweet.create([
+      { name: "Rasgulla", category: "Bengali", price: 50, quantity: 10 },
+      { name: "Ladoo", category: "Indian", price: 30, quantity: 15 },
+    ]);
 
-  const res = await request(app)
-    .get("/api/sweets/search?category=Indian")
-    .set("Authorization", `Bearer ${token}`);
+    const res = await request(app)
+      .get("/api/sweets/search?category=Indian")
+      .set("Authorization", `Bearer ${token}`);
 
-  expect(res.statusCode).toBe(200);
-  expect(res.body.length).toBe(1);
-  expect(res.body[0].category).toBe("Indian");
-});
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(1);
+    expect(res.body[0].category).toBe("Indian");
+  });
 
-it("should filter sweets by price range", async () => {
-  await Sweet.create([
-    { name: "Rasgulla", category: "Bengali", price: 50, quantity: 10 },
-    { name: "Kaju Katli", category: "Indian", price: 100, quantity: 5 }
-  ]);
+  it("should filter sweets by price range", async () => {
+    await Sweet.create([
+      { name: "Rasgulla", category: "Bengali", price: 50, quantity: 10 },
+      { name: "Kaju Katli", category: "Indian", price: 100, quantity: 5 },
+    ]);
 
-  const res = await request(app)
-    .get("/api/sweets/search?minPrice=40&maxPrice=80")
-    .set("Authorization", `Bearer ${token}`);
+    const res = await request(app)
+      .get("/api/sweets/search?minPrice=40&maxPrice=80")
+      .set("Authorization", `Bearer ${token}`);
 
-  expect(res.statusCode).toBe(200);
-  expect(res.body.length).toBe(1);
-  expect(res.body[0].name).toBe("Rasgulla");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(1);
+    expect(res.body[0].name).toBe("Rasgulla");
+  });
 });

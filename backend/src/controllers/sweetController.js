@@ -109,3 +109,35 @@ exports.restockSweet = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+//search sweet 
+exports.searchSweets = async (req, res) => {
+  try {
+    const { name, category, minPrice, maxPrice } = req.query;
+
+    let filter = {};
+
+    // Name search (case-insensitive, partial match)
+    if (name) {
+      filter.name = { $regex: name, $options: "i" };
+    }
+
+    // Category filter
+    if (category) {
+      filter.category = category;
+    }
+
+    // Price range filter
+    if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) filter.price.$gte = Number(minPrice);
+      if (maxPrice) filter.price.$lte = Number(maxPrice);
+    }
+
+    const sweets = await Sweet.find(filter);
+    res.status(200).json(sweets);
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
