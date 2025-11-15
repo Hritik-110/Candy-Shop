@@ -1,3 +1,4 @@
+const Order = require("../models/Order");
 const Sweet = require("../models/Sweet");
 
 // CREATE SWEET
@@ -77,12 +78,30 @@ exports.purchaseSweet = async (req, res) => {
       return res.status(400).json({ message: "Not enough stock available" });
     }
 
+    // Stock reduce
     sweet.quantity -= quantity;
     await sweet.save();
 
-    res.status(200).json(sweet);
+    // CREATE ORDER HERE
+    const order = await Order.create({
+      userId: req.user.id,
+      sweetName: sweet.name,
+      price: sweet.price,
+      quantity,
+      total: sweet.price * quantity,
+    });
+
+    console.log("ORDER SAVED:", order); // Debug log
+
+    return res.status(200).json({
+      message: "Purchase successful",
+      sweet,
+      order,
+    });
+
   } catch (err) {
-    res.status(500).json({ message: "Server error", err });
+    console.log("Purchase Error:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 

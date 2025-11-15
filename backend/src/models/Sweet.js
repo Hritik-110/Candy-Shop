@@ -5,6 +5,7 @@ const sweetSchema = new mongoose.Schema({
   category: { type: String, required: true },
   price: { type: Number, required: true },
   quantity: { type: Number, required: true },
+  image: { type: String, default: "" }
 });
 
 module.exports = mongoose.model("Sweet", sweetSchema);
