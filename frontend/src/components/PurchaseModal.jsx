@@ -73,7 +73,7 @@ const PurchaseModal = ({ sweet, token, onClose, onSuccess }) => {
             value={qty}
             min={1}
             max={sweet.quantity}
-            onChange={(e) => setQty(e.target.value)}
+            onChange={(e) => setQty(e.target.value)}//updating qty
             className="w-32 p-2 border rounded-xl text-center shadow bg-white/70 outline-none 
                        focus:ring-2 focus:ring-purple-400"
           />
