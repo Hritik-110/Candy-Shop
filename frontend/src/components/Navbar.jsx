@@ -51,7 +51,7 @@ const Navbar = () => {
           {/* Logged in */}
           {token && (
             <>
-              {/* Admin Panel Button */}
+              {/* Admin Panel Button for adding sweets*/}
               {user?.role === "admin" && (
                 <Link
                   to="/admin"
