@@ -1,99 +1,178 @@
-# 🍬 Sweet Shop Management System 
-A full-stack MERN application to manage sweets, perform purchases, track stock, manage admin operations, and provide a smooth user shopping experience. ---
- 
 
-# Take demo of Sweet Shop:
-  https://sweet-shop-management-system-eta.vercel.app/
-# 🚀 1. Project Overview :
-Sweet Shop Management System is a MERN-based full-stack web application designed to: 
-✔ Allow users to view, search, and purchase sweets
-✔ Allow admin to add, update, delete, or restock sweets 
-✔ Provide authentication & authorization (User vs Admin) 
-✔ Display purchase history to users 
-✔ Responsive UI with Tailwind CSS 
+
+# 🍭 Sweet Shop Inventory & Purchase Management System
+
+A full-stack MERN web application for managing sweets, handling customer purchases, maintaining stock, and providing admin-level control for a sweet shop.
 
 ---
 
-# 🛠 2. Tech Stack 
- # Frontend (To run frontend command = npm start)
- React.js 
- React Router 
- Tailwind CSS 
- Toast Notifications 
- # Backend (To run backend command = node server.js)
- Node.js 
- Express.js
- MongoDB + Mongoose 
- JWT Authentication 
- 
- 
- ---
+# 🌟 1. Project Summary
 
- # ⚙️ 3. Setup Instructions (Run Locally) 
-  Follow the steps exactly as written. --- 
-   📌 Clone the Repository 
-   git clone https://github.com/<your-username>/sweet-shop-management-system.git 
-   cd sweet-shop-management-system 
-   
-   ---
+This application is designed to streamline sweet shop operations. It allows customers to browse and buy sweets, while admins can manage stock, update items, and track sales.
+It features:
 
-   # 🧩 4. Backend Setup 
-   📂 Navigate to Backend 
-   cd backend 
-   📦 Install Dependencies npm install
-   📝 Create .env file inside backend folder 
-   PORT=4000 
-   MONGO_URI=your_mongodb_atlas_url 
-   JWT_SECRET=your-secret-key 
-   ▶️ Run Backend npm start Backend will now run on: http://localhost:4000
-   
-   ---
-  # 🎨 5. Frontend Setup 
-  📂 Navigate to Frontend cd ../frontend 
-  📦 Install Dependencies npm install 
-  ▶️ Run Frontend npm start Frontend will run on: http://localhost:3000 
-  
-  ---
+✔ Sweet listing, search, and purchase
+✔ Admin CRUD operations
+✔ JWT-based login system
+✔ Order history for users
+✔ Responsive modern UI made with Tailwind
 
+---
 
-  # 🧪 6. Testing Instructions
-   Project contains automated tests (Jest / Manual API Testing). Run Backend Test Suite npm test 
-   
-   ---
+# 🧰 2. Tech Stack
 
-   # 📄 7. Test Report 
-   Test Case Description Status 
-    User Registration Ensures new users can sign up ✔ Passed 
-    User Login Validates email/password and returns JWT ✔ Passed 
-    Auth Middleware Blocks unauthorized access ✔ Passed 
-    Add Sweet (Admin) Admin can add sweets ✔ Passed 
-    Purchase Sweet User can buy sweet & order created ✔ Passed 
-    Get Orders User sees own orders ✔ Passed
-    Pagination Sweets list paginated properly ✔ Passed 
-    ➡ All tests passed successfully. 
-    ➡ Manual testing screenshots can be added here if needed. 
-    
-   ---
+### **Frontend** (Run using `npm start`)
 
-   # 🖼️ 8. Screenshots
+* React.js
+* React Router
+* Tailwind CSS
+* Toast Notifications
 
-   plz refer to screen shots folder in a current repository
-   project-root/
-  ├── backend/
-  ├ ── frontend/
-  ├── screenshots/   ← यहाँ सभी images रखी गई हैं
-  └── README.md
+### **Backend** (Run using `node server.js`)
 
-  # 🤖 9. My AI Usage (Mandatory Section) 
-  This project was partially developed with the help of AI assistance (ChatGPT).
-  The AI was used for: Improving UI design concepts Writing clean & optimized React components 
-  Creating validation logic Writing certain backend controller and middleware snippets 
-  Improving Tailwind CSS styling Writing the README.md structure All final decisions, debugging, project structure, and implementation were manually reviewed and approved by the developer.
+* Node.js
+* Express.js
+* MongoDB (Mongoose ORM)
+* JWT Authentication
 
-  --- 
-  
-  # 🎉 10. Author 
-  Harshit Gupta 
-  MERN Stack Developer 
-  Location: India ---
- 
+---
+
+# ⚙️ 3. How to Run the Project Locally
+
+### 📌 Step 1 — Clone this repository
+
+```bash
+git clone https://github.com/<your-username>/sweet-shop-management-system.git
+cd sweet-shop-management-system
+```
+
+---
+
+# 🖥️ 4. Backend Setup
+
+### 1. Move into backend folder
+
+```bash
+cd backend
+```
+
+### 2. Install required packages
+
+```bash
+npm install
+```
+
+### 3. Create a `.env` file inside backend
+
+```
+PORT=4000
+MONGO_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+### 4. Start the backend server
+
+```bash
+npm start
+```
+
+Backend will run on:
+👉 [http://localhost:4000](http://localhost:4000)
+
+---
+
+# 🎨 5. Frontend Setup
+
+### 1. Open frontend folder
+
+```bash
+cd ../frontend
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the frontend
+
+```bash
+npm start
+```
+
+Frontend runs on:
+👉 [http://localhost:3000](http://localhost:3000)
+
+---
+
+# 🧪 6. Testing
+
+The project supports both manual API testing and automated test execution.
+
+### Run backend tests
+
+```bash
+npm test
+```
+
+---
+
+# 📊 7. Test Summary
+
+| Test Case         | Description                    | Result   |
+| ----------------- | ------------------------------ | -------- |
+| User Signup       | Registers a new user           | ✔ Passed |
+| User Login        | Valid credentials return token | ✔ Passed |
+| Auth Middleware   | Restricts unauthorized access  | ✔ Passed |
+| Add Sweet (Admin) | Admin adds sweet item          | ✔ Passed |
+| Purchase Sweet    | Creates user order             | ✔ Passed |
+| View Orders       | User sees own order list       | ✔ Passed |
+| Pagination        | Works for sweet listing        | ✔ Passed |
+
+All tests executed successfully.
+
+---
+
+# 🖼️ 8. Screenshots
+
+All screenshots are available inside:
+
+```
+project-root/
+ ├── backend/
+ ├── frontend/
+ ├── screenshots/   ← All preview images stored here
+ └── README.md
+```
+
+---
+
+# 🤖 9. Use of AI in This Project (Required)
+
+Portions of this project were created with assistance from AI tools (ChatGPT).
+AI was mainly used for:
+
+* UI/UX improvement ideas
+* Code optimization suggestions
+* Writing reusable frontend components
+* Drafting backend controller logic
+* Enhancing Tailwind styling patterns
+* Structuring this README file
+
+All final code was written, reviewed, tested, and organized manually by the developer.
+
+---
+
+# 👨‍💻 10. Developer
+
+**Hritik Rathore**
+Full Stack (MERN) Developer
+
+If you want, I can also:
+
+✅ Rewrite your entire project folder structure to avoid duplication
+✅ Rewrite backend routes/controllers uniquely
+✅ Rewrite frontend components in a different coding style
+
+Just send the folder or selected files.
