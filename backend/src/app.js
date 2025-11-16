@@ -13,7 +13,7 @@ const app = express();
 // ✅ CORS FIX
 app.use(
   cors({
-    origin: "*",
+    origin: "https://sweet-shop-management-system-eta.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
