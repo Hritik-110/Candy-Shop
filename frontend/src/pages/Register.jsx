@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -14,6 +14,14 @@ const Register = () => {
   });
 
   const [error, setError] = useState("");
+
+  // Disable scroll on register page
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -40,7 +48,16 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-white to-pink-200 px-4">
+    <div
+      className="
+        flex items-start justify-center
+        h-[calc(100vh-60px)]
+        pt-10
+        bg-gradient-to-br from-purple-100 via-white to-pink-200
+        px-4
+        overflow-hidden
+      "
+    >
 
       {/* Glass Card */}
       <div className="backdrop-blur-xl bg-white/40 shadow-2xl p-10 rounded-3xl w-full max-w-md border border-white/30 animate-fadeIn">
